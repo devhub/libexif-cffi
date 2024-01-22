@@ -24,7 +24,7 @@ setup(
     license='MIT',
     packages=['libexif'],
     package_data={'libexif': ['libexif.cdef']},
-    setup_requires=['cffi >= 1.0'],
-    install_requires=['cffi >= 1.0'],
+    setup_requires=['cffi >= 1.0,<1.6'],
+    install_requires=['cffi >= 1.0,<1.6'],
     cffi_modules=["libexif/libexif_build.py:ffi"]
 )
