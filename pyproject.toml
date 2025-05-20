@@ -1,0 +1,28 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+  "setuptools",
+]
+
+[project]
+name = 'libexif-cffi'
+dynamic = ["version", "readme"]
+dependencies = [
+  "cffi >= 1.0",
+]
+description = "exif manipulation utilities"
+license = 'MIT'
+maintainers = [ { name = "Gerald Thibault" } ]
+authors = [
+  { name = "Gerald Thibault", email = "jt@devhub.com" }
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "libexif.__version__"}
+readme = {file = "README.md", content-type = "text/markdown" }
+
+[project.entry-points."distutils.setup_keywords"]
+cffi_modules = "libexif.libexif_build:ffi"
+
+[project.urls]
+"Source Code" = "https://github.com/devhub/libexif-cffi"
