@@ -1,21 +1,25 @@
 import os
 
 from cffi import FFI
+from pathlib import Path
 
 
-with open(os.path.join(os.path.dirname(__file__), 'libexif.cdef')) as fp:
-    CDEF = fp.read()
+ffibuilder = FFI()
 
+PROJECT_PATH = Path(__file__).parent.parent
+PACKAGE_ABS_PATH = Path(__file__).parent
+PACKAGE_REL_PATH = PACKAGE_ABS_PATH.relative_to(PROJECT_PATH)
 
-SOURCE = """
-#include "libexif/exif-data.h"
-"""
+with open(PACKAGE_ABS_PATH / 'c-src' / 'libexif.c', 'r') as f:
+    ffibuilder.set_source(
+        module_name="_libexif",
+        source=f.read(),
+        libraries=["exif"],
+    )
 
-
-ffi = FFI()
-ffi.set_source("_libexif", SOURCE, libraries=['exif'])
-ffi.cdef(CDEF)
+with open(PACKAGE_ABS_PATH / 'c-src' / 'cdef.c', 'r') as f:
+    ffibuilder.cdef(f.read())
 
 
 if __name__ == '__main__':
-    ffi.compile()
+    ffibuilder.compile()

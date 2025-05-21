@@ -1,6 +1,7 @@
 [build-system]
 build-backend = "setuptools.build_meta"
 requires = [
+  "cffi",
   "setuptools",
 ]
 
@@ -17,12 +18,12 @@ authors = [
   { name = "Gerald Thibault", email = "jt@devhub.com" }
 ]
 
+[project.urls]
+"Source Code" = "https://github.com/devhub/libexif-cffi"
+
+[tool.setuptools]
+packages = ["libexif"]
+
 [tool.setuptools.dynamic]
 version = {attr = "libexif.__version__"}
 readme = {file = "README.md", content-type = "text/markdown" }
-
-[project.entry-points."distutils.setup_keywords"]
-cffi_modules = "libexif.libexif_build:ffi"
-
-[project.urls]
-"Source Code" = "https://github.com/devhub/libexif-cffi"
