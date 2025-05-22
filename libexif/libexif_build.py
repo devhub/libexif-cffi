@@ -1,7 +1,10 @@
 import os
 
 from cffi import FFI
-from pathlib import Path
+try:
+    from pathlib import Path
+except ImportError:
+    from pathlib2 import Path
 
 
 ffibuilder = FFI()
